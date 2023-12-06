@@ -1,6 +1,7 @@
 from .exceptions import TooOldHydrogramVersion
 from .exceptions import TooOldPyrogramVersion
 from .exceptions import TooOldTelethonVersion
+from .exceptions import TooOldPyroforkVersion
 from .version_manager import VersionManager
 
 
@@ -10,11 +11,13 @@ class Environment:
         min_pyrogram_version: str,
         min_telethon_version: str,
         min_hydrogram_version: str,
+        min_pyrofork_version: str,
         client_name: str,
     ):
         self._REQUIRED_PYROGRAM_VERSION = min_pyrogram_version
         self._REQUIRED_TELETHON_VERSION = min_telethon_version
         self._REQUIRED_HYDROGRAM_VERSION = min_hydrogram_version
+        self._REQUIRED_PYROFORK_VERSION = min_pyrofork_version
         self._client_name = client_name
 
     def check_environment(self):
@@ -50,4 +53,15 @@ class Environment:
                 raise TooOldHydrogramVersion(
                     self._REQUIRED_HYDROGRAM_VERSION,
                     hydrogram.__version__,
+                )
+        elif self._client_name == 'pyrofork':
+            import pyrofork
+            if VersionManager.version_tuple(
+                pyrofork.__version__,
+            ) < VersionManager.version_tuple(
+                self._REQUIRED_PYROFORK_VERSION,
+            ):
+                raise TooOldPyroforkVersion(
+                    self._REQUIRED_PYROFORK_VERSION,
+                    pyrofork.__version__,
                 )

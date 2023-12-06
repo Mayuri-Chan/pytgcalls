@@ -33,6 +33,12 @@ class MtProtoClient:
                 cache_duration,
                 client,
             )
+        elif client.__class__.__module__ == 'pyrofork.client':
+            from .pyrofork_client import PyroforkClient
+            self._bind_client = PyroforkClient(
+                cache_duration,
+                client,
+            )
         else:
             raise InvalidMTProtoClient()
 
@@ -45,6 +51,8 @@ class MtProtoClient:
             return 'telethon'
         elif client_name == 'HydrogramClient':
             return 'hydrogram'
+        elif client_name == 'PyroforkClient':
+            return 'pyrofork'
         else:
             return 'unknown'
 

@@ -28,6 +28,7 @@ class PyTgCalls(Methods, Scaffold):
             self._REQUIRED_PYROGRAM_VERSION,
             self._REQUIRED_TELETHON_VERSION,
             self._REQUIRED_HYDROGRAM_VERSION,
+            self._REQUIRED_PYROFORK_VERSION,
             self._app.client,
         )
         self._cache_user_peer = Cache()

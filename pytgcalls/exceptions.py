@@ -37,6 +37,19 @@ class TooOldHydrogramVersion(Exception):
         )
 
 
+class TooOldPyroforkVersion(Exception):
+    def __init__(
+            self,
+            version_needed: str,
+            pyrofork_version: str,
+    ):
+        super().__init__(
+            f'Needed pyrofork {version_needed}+, '
+            'actually installed is '
+            f'{pyrofork_version}',
+        )
+
+
 class InvalidStreamMode(Exception):
     def __init__(self):
         super().__init__(
